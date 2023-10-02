@@ -36,7 +36,7 @@ panwd<-(totwd-gap-2*yaxwd)/2
 panht<-panwd/3.15
 totht<-(xaxht+panht+gap+panht+titlespace)
 
-pdf(file=paste0(resloc,"Fig_Mechanisms_InteractingMoranEffects_Part1.pdf"),height=totht,width=totwd)
+pdf(file=paste0(resloc,"Fig_Mechanisms_InteractingMoranEffects.pdf"),height=totht,width=totwd)
 
 #***part 1, which shows synergistic effects
 
