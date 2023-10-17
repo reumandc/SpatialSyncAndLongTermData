@@ -4,7 +4,7 @@
 % creation and correlation calculation included. Reproducible timeseries,
 % correlaions, timescale vector, and wavelet mean field examples are
 % performed using saved csv files.
-% Written by Lawrence Schepard, edited by Ethan Kadiyala
+% Written by Lawrence Sheppard, edited by Ethan Kadiyala
 % 10/17/2023
 
 close all
