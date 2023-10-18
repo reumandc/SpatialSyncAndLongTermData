@@ -147,7 +147,7 @@ res2<-wmf(dat,times, scale.max.input = 30)
 par(mar=c(7,7,2,7), cex.lab = 2.75, cex.axis = 2.25, tcl = -.75, mgp = c(3.5,1.5,0))
 plotmag(res2, cex = 16)
 
-pdf("Fig_Changes_Pedagogical_ChangeTimesale.pdf", width = 10, height = 7.5)
+pdf("Fig_Changes_Pedagogical_ChangeTimesaleWMF.pdf", width = 10, height = 7.5)
 par(mar=c(7,7,2,7), cex.lab = 2.75, cex.axis = 2.25, tcl = -.75, mgp = c(3.5,1.5,0))
 plotmag(res2)
 dev.off()
