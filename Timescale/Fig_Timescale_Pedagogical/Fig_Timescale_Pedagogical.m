@@ -1,8 +1,8 @@
 % The following script takes 10 synthesized timeseries and compares the
 % applicaiton of non-timesclae specific techniques (correlaion) to
-% timescale specific methods (wavelet mean fields). Example timeseries
+% timescale specific methods (wavelet phasor mean fields). Example timeseries
 % creation and correlation calculation included. Reproducible timeseries,
-% correlaions, timescale vector, and wavelet mean field examples are
+% correlaions, timescale vector, and wavelet phasor mean field examples are
 % performed using saved csv files.
 % Written by Lawrence Sheppard, edited by Ethan Kadiyala, 10/18/2023
 % Created in MATLAB R2021a
@@ -93,7 +93,7 @@ xlabel('Pearson correlation coefficient (r)')
 set(gcf, 'paperpositionmode','manual','paperunits','inches','paperposition',[0 0 4 2],'papersize',[4 2])
     eval(['print -dpdf -r600 Fig_Timescale_PedagogicalCorrelation'])   
 
-% wavelet mean field
+% wavelet phasor mean field
     figure
 hold on
 surf(1./scalefrequency1,t,abs(mf'),abs(mf'))
