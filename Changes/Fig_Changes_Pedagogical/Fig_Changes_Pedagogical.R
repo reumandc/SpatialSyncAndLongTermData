@@ -72,11 +72,11 @@ dat <- cleandat(dat, times, 1)$cdat
 
 # plot WMF
 res1<-wmf(dat,times, scale.max.input = 30)
-par(mar=c(7,7,2,7), cex.lab = 2.75, cex.axis = 2.25, tcl = -.75, mgp = c(3.25,1.5,0))
+par(mar=c(5,6.5,1,7), cex.lab = 3.25, cex.axis = 2.25, tcl = -.75, mgp = c(4,1.5,0))
 plotmag(res1)
 
 pdf("Fig_Changes_Pedagogical_ChangeTimeWMF.pdf", width = 10, height = 7.5)
-par(mar=c(7,7,2,7), cex.lab = 2.75, cex.axis = 2.25, tcl = -.75, mgp = c(3.5,1.5,0))
+par(mar=c(5,6.5,1,7), cex.lab = 3.25, cex.axis = 2.25, tcl = -.75, mgp = c(4,1.5,0))
 plotmag(res1)
 dev.off()
 
@@ -144,11 +144,11 @@ dat <- cleandat(dat, times, 1)$cdat
 
 # plot WMF
 res2<-wmf(dat,times, scale.max.input = 30)
-par(mar=c(7,7,2,7), cex.lab = 2.75, cex.axis = 2.25, tcl = -.75, mgp = c(3.5,1.5,0))
+par(mar=c(5,6.5,1,7), cex.lab = 3.25, cex.axis = 2.25, tcl = -.75, mgp = c(4,1.5,0))
 plotmag(res2, cex = 16)
 
 pdf("Fig_Changes_Pedagogical_ChangeTimesaleWMF.pdf", width = 10, height = 7.5)
-par(mar=c(7,7,2,7), cex.lab = 2.75, cex.axis = 2.25, tcl = -.75, mgp = c(3.5,1.5,0))
+par(mar=c(5,6.5,1,7), cex.lab = 3.25, cex.axis = 2.25, tcl = -.75, mgp = c(4,1.5,0))
 plotmag(res2)
 dev.off()
 
@@ -267,7 +267,7 @@ p5 <- corr_df_pre %>%
                        na.value = "grey",
                        breaks=c(0,0.5,1),
                        limits=c(-.1,1))+
-  theme_bw(base_size = 18) +
+  theme_bw(base_size = 22) +
   theme(panel.grid = element_blank(),
         panel.border = element_blank(),
         axis.ticks = element_blank(),
@@ -304,7 +304,7 @@ p6 <- corr_df_post %>%
                        na.value = "grey",
                        breaks=c(0,0.5,1),
                        limits=c(-.2,1))+     # in case of negative correlation by chance
-  theme_bw(base_size = 18) +
+  theme_bw(base_size = 22) +
   theme(panel.grid = element_blank(),
         panel.border = element_blank(),
         axis.ticks = element_blank(),
@@ -328,7 +328,7 @@ p7 <- corr_df_post %>%
                        na.value = "grey",
                        breaks=c(0,0.5,1),
                        limits=c(-.1,1))+ 
-  theme_bw(base_size = 18) +
+  theme_bw(base_size = 20) +
   theme(panel.grid = element_blank(),
         panel.border = element_blank(),
         axis.ticks = element_blank(),
