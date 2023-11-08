@@ -9,7 +9,8 @@ library(tidyverse)
 library(patchwork)
 library(paletteer)
 
-# Panel 1 construct 4 time series piecing together two frequencies -------------------------------------------------
+
+# Row 1 construct 4 time series piecing together two frequencies -------------------------------------------------
 b1 <- 1
 b2 <- 2
 b3 <- 3
@@ -50,11 +51,11 @@ p1 <- dt %>%
   pivot_longer(cols = c("t1","t2","t3","t4")) %>%
   ggplot(aes(x = time, y = value, group = name)) +
   geom_line() +
-  theme_bw(base_size = 14) +
+  theme_bw(base_size = 13) +
   theme(panel.grid = element_blank(),
-        axis.text.x = element_blank(),
-        axis.ticks.x = element_blank()) +
+        axis.ticks.length=unit(-0.15, "cm")) +
   xlab(element_blank()) +
+  scale_x_continuous(limits = c(1,100), breaks = c(1,25,50,75,100), labels = c(0,25,50,75,100), expand = c(0.01,0.01)) +
   scale_y_continuous("", breaks = c(1,2,3,4))
 
 p1
@@ -70,18 +71,25 @@ dat <- dt %>%
 times = 1:ncol(dat)
 dat <- cleandat(dat, times, 1)$cdat
 
+# Define plot arguments for consistent WMF plots ---------------------------
+WMF_lab <- 3.75
+WMF_axis <- 2.5
+WMF_ticks <- .6
+WMF_spacing <- c(3.5,1,0)
+WMF_margins <- c(5,6.5,1,7)
+
 # plot WMF
 res1<-wmf(dat,times, scale.max.input = 30)
-par(mar=c(5,6.5,1,7), cex.lab = 3.25, cex.axis = 2.25, tcl = -.75, mgp = c(4,1.5,0))
+par(mar= WMF_margins, cex.lab = WMF_lab, cex.axis = WMF_axis, tcl = WMF_ticks, mgp = WMF_spacing)
 plotmag(res1)
 
-pdf("Fig_Changes_Pedagogical_ChangeTimeWMF.pdf", width = 10, height = 7.5)
-par(mar=c(5,6.5,1,7), cex.lab = 3.25, cex.axis = 2.25, tcl = -.75, mgp = c(4,1.5,0))
+
+pdf("Fig_Changes_Pedagogical_ChangeTimeWMF.pdf", width = 11, height = 7.5)
+par(mar= WMF_margins, cex.lab = WMF_lab, cex.axis = WMF_axis, tcl = WMF_ticks, mgp = WMF_spacing)
 plotmag(res1)
 dev.off()
 
-
-# Panel 2 - decrease frequencies over time  ----------------------------------------------------
+# Row 2 - decrease frequencies over time  ----------------------------------------------------
 
 scale_coef <- 2.5 # to scale the amplitudes of the timeseries on the plot
 
@@ -122,12 +130,12 @@ p2 <- dt %>%
   pivot_longer(cols = c("t1","t2","t3","t4")) %>%
   ggplot(aes(x = time, y = value, group = name)) +
   geom_line() +
-  theme_bw(base_size = 14) +
+  theme_bw(base_size = 13) +
   theme(panel.grid = element_blank(),
-        axis.text.x = element_blank(),
-        axis.ticks.x = element_blank()) +
+        axis.ticks.length=unit(-0.15, "cm")) +
   xlab(element_blank()) +
-  scale_y_continuous("Location", breaks = c(1,2,3,4))
+  scale_x_continuous(limits = c(1,100), breaks = c(1,25,50,75,100), labels = c(0,25,50,75,100), expand = c(0.01,0.01)) +
+  scale_y_continuous("Site", breaks = c(1,2,3,4))
 
 p2
 
@@ -144,16 +152,16 @@ dat <- cleandat(dat, times, 1)$cdat
 
 # plot WMF
 res2<-wmf(dat,times, scale.max.input = 30)
-par(mar=c(5,6.5,1,7), cex.lab = 3.25, cex.axis = 2.25, tcl = -.75, mgp = c(4,1.5,0))
+par(mar= WMF_margins, cex.lab = WMF_lab, cex.axis = WMF_axis, tcl = WMF_ticks, mgp = WMF_spacing)
 plotmag(res2, cex = 16)
 
-pdf("Fig_Changes_Pedagogical_ChangeTimesaleWMF.pdf", width = 10, height = 7.5)
-par(mar=c(5,6.5,1,7), cex.lab = 3.25, cex.axis = 2.25, tcl = -.75, mgp = c(4,1.5,0))
+pdf("Fig_Changes_Pedagogical_ChangeTimescaleWMF.pdf", width = 11, height = 7.5)
+par(mar= WMF_margins, cex.lab = WMF_lab, cex.axis = WMF_axis, tcl = WMF_ticks, mgp = WMF_spacing)
 plotmag(res2)
 dev.off()
 
 
-# Panel 3 plot sites and abrupt change at two sites -------------------
+# Row 3 plot sites and abrupt change at two sites -------------------
 
 # construct 4 time series, sites 1 and 2 experience abrupt change
 scale_coef <- 2
@@ -218,11 +226,11 @@ p4 <- dt %>%
   pivot_longer(cols = c("t1","t2","t3","t4")) %>%
   ggplot(aes(x = time, y = value, group = name)) +
   geom_line() +
-  theme_bw(base_size = 14) +
-  theme(panel.grid = element_blank()) +
+  theme_bw(base_size = 13) +
+  theme(panel.grid = element_blank(),
+        axis.ticks.length=unit(-0.15, "cm")) +
   xlab(element_blank()) +
-  ylab(element_blank()) +
-  scale_y_continuous(breaks = c(1,2,3,4)) +
+  scale_x_continuous(limits = c(1,100), breaks = c(1,25,50,75,100), labels = c(0,25,50,75,100), expand = c(0.01,0.01)) +
   scale_y_continuous("", breaks = c(1,2,3,4))
 
 p4
@@ -267,7 +275,7 @@ p5 <- corr_df_pre %>%
                        na.value = "grey",
                        breaks=c(0,0.5,1),
                        limits=c(-.1,1))+
-  theme_bw(base_size = 22) +
+  theme_bw(base_size = 25) +
   theme(panel.grid = element_blank(),
         panel.border = element_blank(),
         axis.ticks = element_blank(),
@@ -304,7 +312,7 @@ p6 <- corr_df_post %>%
                        na.value = "grey",
                        breaks=c(0,0.5,1),
                        limits=c(-.2,1))+     # in case of negative correlation by chance
-  theme_bw(base_size = 22) +
+  theme_bw(base_size = 25) +
   theme(panel.grid = element_blank(),
         panel.border = element_blank(),
         axis.ticks = element_blank(),
@@ -345,13 +353,13 @@ p7
 # construct panel in patchwork, save plots --------------------------------
 
 # patch sections
-patch1 <- p1 / p2 / (p4)
+patch1 <- p1 / p2 / p4
 patch1 + xlab("Time")
 ggsave("Fig_Changes_Pedagogical_Timeseries.pdf", width = 7.5, height = 10)
 
 patch2 <- (p5 | p6) + xlab("Site")
 patch2 
-ggsave("Fig_Changes_Pedagogical_Matrices.pdf", width = 8, height = 7)
+ggsave("Fig_Changes_Pedagogical_Matrices.pdf", width = 7.5, height = 10)
 
 p7
 ggsave("Fig_Changes_Pedagogical_MatrixLegend.pdf", width = 8, height = 7)
