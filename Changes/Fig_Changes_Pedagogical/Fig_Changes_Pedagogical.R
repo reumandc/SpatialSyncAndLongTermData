@@ -51,8 +51,9 @@ p1 <- dt %>%
   pivot_longer(cols = c("t1","t2","t3","t4")) %>%
   ggplot(aes(x = time, y = value, group = name)) +
   geom_line() +
-  theme_bw(base_size = 13) +
+  theme_bw(base_size = 17) +
   theme(panel.grid = element_blank(),
+        axis.text = element_text(color = "black"),
         axis.ticks.length=unit(-0.15, "cm")) +
   xlab(element_blank()) +
   scale_x_continuous(limits = c(1,100), breaks = c(1,25,50,75,100), labels = c(0,25,50,75,100), expand = c(0.01,0.01)) +
@@ -72,22 +73,34 @@ times = 1:ncol(dat)
 dat <- cleandat(dat, times, 1)$cdat
 
 # Define plot arguments for consistent WMF plots ---------------------------
-WMF_lab <- 3.75
-WMF_axis <- 2.5
-WMF_ticks <- .6
-WMF_spacing <- c(3.5,1,0)
-WMF_margins <- c(5,6.5,1,7)
+WMF_lab <- 3.6
+WMF_axis <- 2.8
+WMF_ticks <- .5
+WMF_spacing <- c(3.9,1.3,0)
+WMF_margins <- c(5,6.75,1,4)
+WMF_legendwidth <- 2
+WMF_legendmar <- 7
 
 # plot WMF
 res1<-wmf(dat,times, scale.max.input = 30)
+
+timescales <- res1$timescales        # save timescales for plot customization
+ylocs <- pretty(timescales, n = 8)   # set axis intervals
+xlocs <- pretty(times, n = 8)
+
 par(mar= WMF_margins, cex.lab = WMF_lab, cex.axis = WMF_axis, tcl = WMF_ticks, mgp = WMF_spacing)
-plotmag(res1)
+plotmag(res1,  legend.width = WMF_legendwidth, legend.mar = WMF_legendmar) 
+axis(1, at = xlocs, labels = xlocs, lwd = 2)
+axis(2, at = log2(ylocs), labels = ylocs, lwd = 2)
 
 
-pdf("Fig_Changes_Pedagogical_ChangeTimeWMF.pdf", width = 11, height = 7.5)
+pdf("Fig_Changes_Pedagogical_ChangeTimeWMF.pdf", width = 12, height = 7.5)
 par(mar= WMF_margins, cex.lab = WMF_lab, cex.axis = WMF_axis, tcl = WMF_ticks, mgp = WMF_spacing)
-plotmag(res1)
+plotmag(res1, legend.width = WMF_legendwidth, legend.mar = WMF_legendmar)
+axis(1, at = xlocs, labels = xlocs, lwd = 2)
+axis(2, at = log2(ylocs), labels = ylocs, lwd = 2)
 dev.off()
+
 
 # Row 2 - decrease frequencies over time  ----------------------------------------------------
 
@@ -130,9 +143,11 @@ p2 <- dt %>%
   pivot_longer(cols = c("t1","t2","t3","t4")) %>%
   ggplot(aes(x = time, y = value, group = name)) +
   geom_line() +
-  theme_bw(base_size = 13) +
+  theme_bw(base_size = 17) +
   theme(panel.grid = element_blank(),
-        axis.ticks.length=unit(-0.15, "cm")) +
+        axis.text = element_text(color = "black"),
+        axis.ticks.length=unit(-0.15, "cm"),
+        axis.title.y = element_text(size = 20)) +
   xlab(element_blank()) +
   scale_x_continuous(limits = c(1,100), breaks = c(1,25,50,75,100), labels = c(0,25,50,75,100), expand = c(0.01,0.01)) +
   scale_y_continuous("Site", breaks = c(1,2,3,4))
@@ -153,11 +168,15 @@ dat <- cleandat(dat, times, 1)$cdat
 # plot WMF
 res2<-wmf(dat,times, scale.max.input = 30)
 par(mar= WMF_margins, cex.lab = WMF_lab, cex.axis = WMF_axis, tcl = WMF_ticks, mgp = WMF_spacing)
-plotmag(res2, cex = 16)
+plotmag(res2,legend.width = WMF_legendwidth, legend.mar = WMF_legendmar)
+axis(1, at = xlocs, labels = xlocs, lwd = 2)
+axis(2, at = log2(ylocs), labels = ylocs, lwd = 2)
 
-pdf("Fig_Changes_Pedagogical_ChangeTimescaleWMF.pdf", width = 11, height = 7.5)
+pdf("Fig_Changes_Pedagogical_ChangeTimescaleWMF.pdf", width = 12, height = 7.5)
 par(mar= WMF_margins, cex.lab = WMF_lab, cex.axis = WMF_axis, tcl = WMF_ticks, mgp = WMF_spacing)
-plotmag(res2)
+plotmag(res2, legend.width = WMF_legendwidth, legend.mar = WMF_legendmar)
+axis(1, at = xlocs, labels = xlocs, lwd = 2)
+axis(2, at = log2(ylocs), labels = ylocs, lwd = 2)
 dev.off()
 
 
@@ -226,8 +245,9 @@ p4 <- dt %>%
   pivot_longer(cols = c("t1","t2","t3","t4")) %>%
   ggplot(aes(x = time, y = value, group = name)) +
   geom_line() +
-  theme_bw(base_size = 13) +
+  theme_bw(base_size = 17) +
   theme(panel.grid = element_blank(),
+        axis.text = element_text(color = "black"),
         axis.ticks.length=unit(-0.15, "cm")) +
   xlab(element_blank()) +
   scale_x_continuous(limits = c(1,100), breaks = c(1,25,50,75,100), labels = c(0,25,50,75,100), expand = c(0.01,0.01)) +
@@ -279,9 +299,10 @@ p5 <- corr_df_pre %>%
   theme(panel.grid = element_blank(),
         panel.border = element_blank(),
         axis.ticks = element_blank(),
+        axis.text = element_text(color = "black"),
         aspect.ratio = 1,
         legend.position = "none",
-        plot.title = element_text(hjust = 0.5)) +
+        plot.title = element_text(hjust = 0.5, size = 23)) +
   coord_cartesian(expand = F) +
   ylab("Site") +
   xlab(element_blank()) +
@@ -316,9 +337,10 @@ p6 <- corr_df_post %>%
   theme(panel.grid = element_blank(),
         panel.border = element_blank(),
         axis.ticks = element_blank(),
+        axis.text = element_text(color = "black"),
         aspect.ratio = 1,
         legend.position = "none",
-        plot.title = element_text(hjust = 0.5)) +
+        plot.title = element_text(hjust = 0.5, size = 23)) +
   coord_cartesian(expand = F) +
   xlab(element_blank()) +
   ylab(element_blank()) +
@@ -336,10 +358,11 @@ p7 <- corr_df_post %>%
                        na.value = "grey",
                        breaks=c(0,0.5,1),
                        limits=c(-.1,1))+ 
-  theme_bw(base_size = 20) +
+  theme_bw(base_size = 22) +
   theme(panel.grid = element_blank(),
         panel.border = element_blank(),
         axis.ticks = element_blank(),
+        axis.text = element_text(color = "black"),
         aspect.ratio = 1,
         legend.position = "top") +
   coord_cartesian(expand = F) +
@@ -354,8 +377,8 @@ p7
 
 # patch sections
 patch1 <- p1 / p2 / p4
-patch1 + xlab("Time")
-ggsave("Fig_Changes_Pedagogical_Timeseries.pdf", width = 7.5, height = 10)
+patch1 + xlab("Time") + theme(axis.title.x = element_text(size = 20))
+ggsave("Fig_Changes_Pedagogical_Timeseries.pdf", width = 7, height = 10)
 
 patch2 <- (p5 | p6) + xlab("Site")
 patch2 
