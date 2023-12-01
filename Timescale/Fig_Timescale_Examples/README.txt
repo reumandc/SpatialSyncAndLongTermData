@@ -18,7 +18,15 @@ The aggregated shorebird count is made up of the following species: American Avo
 
 (b) CAR ACCIDENTS
 
-//TODO!!!!
+CDC WONDER CITATION: Centers for Disease Control and Prevention, National Center for Health Statistics. National Vital Statistics System, Mortality 1999-2020 on CDC WONDER Online Database, released in 2021. Data are from the Multiple Cause of Death Files, 1999-2020, as compiled from data provided by the 57 vital statistics jurisdictions through the Vital Statistics Cooperative Program. Accessed at http://wonder.cdc.gov/ucd-icd10.html on Jun 20, 2022 5:52:43 PM
+
+Full methods and details of originally source dataset are described in the reference above.
+
+In short, the file contains monthly state-level time series of human mortality due to car accidents in the United States of America.
+
+Columns consist of row labels, time step, a code denoting the associated month, and one column for each state's mortality time series.
+
+Additional processing consisted of filtering out time series with >25% data suppression, where suppression was triggered by mortality values < 10, and replacement of remaining suppressed values with 5.
 
 (c) KELP BIOMASS
 kelp_biomass.csv
@@ -30,7 +38,7 @@ STUDY CITATION: Castorani, M. C., Bell, T. W., Walter, J. A., Reuman, D. C., Cav
 Full methods and details are described in the references cited above. 
 In short: 
 
-These data are estimates of kelp biomass from satellite data at sites along Central California. Columns: site_id (see study cited above for map of site locations by site ID), year, quarter of the year, kelp biomass (kg)
+These data are quarterly estimates of the canopy biomass of giant kelp (Macrocystis pyrifera) estimated from Landsat satellite imagery along the coast of central California, USA (each site corresponds to a 500-m segment of coastline). Columns: site_id (see study cited above for map of site locations by site ID), year, quarter of the year, kelp biomass (kg)
 
 (d) WILLOW-CARROT APHID PHENOLOGIES 
 willow_carrot_aphid_phenology.csv
@@ -78,4 +86,8 @@ Full methods and details are described in the reference cited above.
 Data are ln-transformed dengue case counts from passive surveillance data from 72 provinces of Thailand. The data are in wide format, where columns=provinces and rows=months. 
 
 (h) BRISTLECONE PINE GROWTH RATES
-// TODO !!!!!
+SpatialSyncAndLongTermData\Timescale\Data_Timescale_Tree_Ring\Data_Timescale_Growth_Chronologies.csv
+ 
+Full methods and details described in Supporting Information.
+ 
+Data are mean-value growth chronologies for nine stands of bristlecone pine trees across California, Nevada, and Utah beginning in year 0 CE and ending in 1979 CE. Data are in long format, with four columns: std = Dimensionless Ring Width Index (growth), samp.depth = Number of samples per observation, year_CE = Common Era year, site = Bristlecone pine stand 
