@@ -1,6 +1,7 @@
 main_calculateWPMFs.R creates the WPMF magnitude & other files needed for plotting
 main_plotWPMFs.m plots those outputs, generating the panels of the Example WPMFs figure 
 
+Note that the final figure was compiled in Adobe Illustrator, so there are cosmetic changes between the figure in the manuscript and the figure panels generated in this code. In particular, the minimum y-axis value was labeled in Illustrator to avoid the appearance that the y-axis starts at 0.
 
 DATASETS USED:
 
