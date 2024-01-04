@@ -1,8 +1,15 @@
 clear all
-x=readtable('.\PCI_NEATl.xlsx');
 
-%based on longpcitransform300823.m
+%Data
+%
+x=webread('https://dassh.ac.uk/downloads/mba_rdm/PCI_NEATl.xlsx') ;
+% https://doi.mba.ac.uk/data/3152
+% DOI:
+% 10.17031/65705f59bc0eb
 % 
+% Preferred Citation:
+% David Johns (Marine Biological Association) (2023): CPR PCI North Atlantic. The Archive for Marine Species and Habitats Data (DASSH). (Dataset). https://doi.org/10.17031/65705f59bc0eb
+
 % Guidelines:
 % 
 % Figures in vector format (PDF or EPS). If that is not possible, a 600 DPI image in TIFF format is OK. JPEG is not accepted.
@@ -41,7 +48,9 @@ monthindex=month(useindex);
 latindex=floor((lat(useindex)-50)/2)+1;
 longindex=floor((long(useindex)+10)/2)+1;
 pciindex=pci(useindex);
+
 %set up empty datasets for each year/month/lat/long
+clear dataset
 for y=1:lastyear+1-firstyear
     for m=1:12
         for lat1=1:5
@@ -58,26 +67,29 @@ for n=1:length(pciindex)
 end
 
 %timeseries with NaNs
+clear pciseries
 for y=1:lastyear+1-firstyear
     for m=1:12
         for lat1=1:5
             for long1=1:10
-                pciseries{lat1,long1}((y-1)*12+m)=nanmean(dataset{y,m,lat1,long1});
+                pciseries{lat1,long1}((y-1)*12+m)=mean(dataset{y,m,lat1,long1},"omitnan");
             end
         end
     end
 end
 
 %monthly medians
+clear mpciseries
 for m=1:12
     for lat1=1:5
         for long1=1:10
-            mpciseries{lat1,long1}(m)=nanmedian(pciseries{lat1,long1}(([1:lastyear+1-firstyear]-1)*12+m));
+            mpciseries{lat1,long1}(m)=median(pciseries{lat1,long1}(([1:lastyear+1-firstyear]-1)*12+m),"omitnan");
         end
     end
 end
 
 % fill timeseries
+clear nnpciseries
 for y=1:lastyear+1-firstyear
     for m=1:12
         for lat1=1:5
@@ -99,6 +111,7 @@ parameters.wavelet.scale_max=12*100;
 f0=0.5;
 sf1=sf_comments(parameters);
 count=0;
+clear wtresult
 for lat1=1:5
     for long1=1:10
         if sum(isnan(pciseries{lat1,long1}))<0.5*length(pciseries{lat1,long1});
@@ -107,7 +120,7 @@ for lat1=1:5
         end
     end
 end
-
+countall{yearlims}=count;
 %mean fields
 [wpmfresult1{yearlims}] = wpmf_comments(wtresult,count);
 
@@ -159,8 +172,8 @@ axes('pos',[.17 .42 .1 .2])
 imshow('thermometer.jpg')
 
 set(gcf, 'paperpositionmode','manual','paperunits','inches','paperposition',[0 0 6 4],'papersize',[6 4])
-print(gcf,'-dtiff', '-r600', ['Z_021123.tif'])
-print(gcf,'-dpdf', '-r600', ['Z_021123.pdf'])
+print(gcf,'-dtiff', '-r600', ['Z_111223.tif'])
+print(gcf,'-dpdf', '-r600', ['Z_111223.pdf'])
 % 
 % Figure Z. the wavelet phasor mean field magnitude of PCI variability in seas
 % around the UK, using a) data from 1984 to 2013, b) data from 1958 to 2013,
@@ -177,5 +190,4 @@ print(gcf,'-dpdf', '-r600', ['Z_021123.pdf'])
 % only apparent due to the extensive sampling and the extended PCI data in panel c reveals yet more synchronous events at
 % long timescales.
 
-close(gcf)
 

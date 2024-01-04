@@ -10,7 +10,7 @@ To run main_calculateExampleWPMFs.R:
 2) Then set the R working directory back to this directory, and see the dependencies at the top of main_calculateWPMFs.R and make sure they are satisfied. Then run that script.
 
 To run main_plotExampleWPMFs.m set the matlab working directory to this directory, and run the script.
-You'll need a more recent version of matlab.
+You may need a fairly recent version of matlab - we used 2023b.
 
 Note that the final figure was compiled in Adobe Illustrator, so there are cosmetic changes between the figure in the manuscript and the figure panels generated in this code. In particular, the minimum y-axis value was labeled in Illustrator to avoid the appearance that the y-axis starts at 0.
 
