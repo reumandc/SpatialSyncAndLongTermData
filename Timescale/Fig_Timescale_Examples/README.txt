@@ -1,5 +1,16 @@
-main_calculateWPMFs.R creates the WPMF magnitude & other files needed for plotting
-main_plotWPMFs.m plots those outputs, generating the panels of the Example WPMFs figure 
+This folder has the code for making the figure showing example wavelet phasor mean 
+field (WPMF) plots for a variety of systems, including shorebird data, car crash fatality
+data, and bristlecone pine growth ring data.
+
+main_calculateExampleWPMFs.R creates the WPMF magnitude & other files needed for plotting
+main_plotExampleWPMFs.m plots those outputs, generating the panels of the Example WPMFs figure 
+
+To run main_calculateExampleWPMFs.R:
+1) First set the R working directory to SpatialSyncAndLongTermData/Timescale/Data_Timescale_Tree_Ring/ and run the R code Data_Timescale_Tree_Ring.R (after making sure all the dependencies listed at the top of that file are met). This creates the bristlecone pine time series as describer in the SI.
+2) Then set the R working directory back to this directory, and see the dependencies at the top of main_calculateWPMFs.R and make sure they are satisfied. Then run that script.
+
+To run main_plotExampleWPMFs.m set the matlab working directory to this directory, and run the script.
+You'll need a more recent version of matlab.
 
 Note that the final figure was compiled in Adobe Illustrator, so there are cosmetic changes between the figure in the manuscript and the figure panels generated in this code. In particular, the minimum y-axis value was labeled in Illustrator to avoid the appearance that the y-axis starts at 0.
 
@@ -11,9 +22,8 @@ shorebird_counts.csv
 EDI CITATION: Santa Barbara Coastal LTER and J. Dugan. 2021. SBC LTER: Beach: Time series of abundance of birds and stranded kelp on selected beaches, ongoing since 2008 ver 10. Environmental Data Initiative. https://doi.org/10.6073/pasta/06c6b9983a5f0a44349e027a002f5040
 
 Full methods and details are described in the reference mentioned above.
-In short: 
- 
-These data are counts of shorebirds on 1km along-shore transects at each of 5 sites. The data here represent the sum across shorebird species by month for each site. Each column represents a month; the data run from Jan 2009 to Dec 2019. Each row represents a site (Arroyo Quemado, Isla Vista, East Campus, Arroyo Burro, Santa Claus Lane).
+
+In short, these data are counts of shorebirds on 1km along-shore transects at each of 5 sites. The data here represent the sum across shorebird species by month for each site. Each column represents a month; the data run from Jan 2009 to Dec 2019. Each row represents a site (Arroyo Quemado, Isla Vista, East Campus, Arroyo Burro, Santa Claus Lane).
 
 The aggregated shorebird count is made up of the following species: American Avocet, Baird's Sandpiper, Black-bellied Plover, Black-necked Stilt, Black Turnstone, unidentified Dowitchers, Dunlin, Greater Yellowlegs, Killdeer, Least Sandpiper, Lesser Yellowlegs, Long-billed Curlew, Long-billed Dowitcher, Marbled Godwit, Pectoral Sandpiper, Red-necked Phalarope, Red Knot, Ruddy Turnstone, Sanderling, Semipalmated Plover, Short-billed Dowitcher, Snowy Plover, Spotted Sandpiper, Surfbird, Wandering Tattler, Western Sandpiper, Whimbrel, Willet, and Wilson's Plover.
 
@@ -37,9 +47,8 @@ EDI CITATION: Santa Barbara Coastal LTER, T. Bell, K. Cavanaugh, D. Reuman, M. C
 STUDY CITATION: Castorani, M. C., Bell, T. W., Walter, J. A., Reuman, D. C., Cavanaugh, K. C., & Sheppard, L. W. (2022). Disturbance and nutrients synchronise kelp forests across scales through interacting Moran effects. Ecology Letters, 25(8), 1854-1868.
 
 Full methods and details are described in the references cited above. 
-In short: 
 
-These data are quarterly estimates of the canopy biomass of giant kelp (Macrocystis pyrifera) estimated from Landsat satellite imagery along the coast of central California, USA (each site corresponds to a 500-m segment of coastline). Columns: site_id (see study cited above for map of site locations by site ID), year, quarter of the year, kelp biomass (kg)
+In short, these data are quarterly estimates of the canopy biomass of giant kelp (Macrocystis pyrifera) estimated from Landsat satellite imagery along the coast of central California, USA (each site corresponds to a 500-m segment of coastline). Columns: site_id (see study cited above for map of site locations by site ID), year, quarter of the year, kelp biomass (kg)
 
 (d) WILLOW-CARROT APHID PHENOLOGIES 
 willow_carrot_aphid_phenology.csv
