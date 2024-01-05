@@ -1,3 +1,10 @@
+This directory has the code making the figure on cycles and synchrony in deer and deer-vehicle
+collisions in Wisconsin.
+
+To get the figure, set the working directory of R to this directory, and run the script
+Fig_Mechanisms_DeerDVC.R from a fresh R session. You may have to verify that the dependencies 
+at the top of the file are available. See below for descriptions of the data files.
+
 Author-- Thomas L. Anderson
 email-- thander@siue.edu
 
