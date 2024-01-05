@@ -2,17 +2,17 @@
 
 Code supporting a paper called "Insights into spatial synchrony enabled by long-term data". 
 
-DC Reuman, University of Kansas, reuman@ku.edu
-JA Walter, UC Davis and University of Virginia
-LW Sheppard, Marine Biological Association of the UK
-VA Karatayev, University of Kansas
-ES Kadiyala, Univrsity of Virginia
-AC Lohmann, University of Virginia
-TL Anderson, Southern Illinois University, Edwardsville
-NJ Coombs, University of Kansas
-KJ Haynes, University of Virginia
-LM Hallett, University of Oregon
-MCN Castorani, University of Virginia
+DC Reuman, University of Kansas, reuman@ku.edu  
+JA Walter, UC Davis and University of Virginia  
+LW Sheppard, Marine Biological Association of the UK  
+VA Karatayev, University of Kansas  
+ES Kadiyala, Univrsity of Virginia  
+AC Lohmann, University of Virginia  
+TL Anderson, Southern Illinois University, Edwardsville  
+NJ Coombs, University of Kansas  
+KJ Haynes, University of Virginia  
+LM Hallett, University of Oregon  
+MCN Castorani, University of Virginia  
 
 ## Introduction
 
