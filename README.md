@@ -16,7 +16,7 @@ MCN Castorani, University of Virginia
 
 ## Introduction
 
-This repository can be used to reproduce the analyses behind the paper "Insights into spatial synchrony enabled by long-term data," which in this case means reproducing the figurs. Necessary data are also included in the repository, or scripts are present which cause data to be downloaded automatically from permanent repositories. 
+This repository can be used to reproduce the analyses behind the paper "Insights into spatial synchrony enabled by long-term data," which in this case means reproducing the figures. Necessary data are also included in the repository, or scripts are present which cause data to be downloaded automatically from permanent repositories. 
 
 ## How to reproduce results, how this repository is organized
 
@@ -24,20 +24,20 @@ The paper "Insights into spatial synchrony enabled by long-term data" has three 
 timescale structure of synchrony, on changes in synchrony, and on mechanisms of synchrony. This
 repository correspondingly has three directories, each containing subdirectories which correspond
 to the figures in that section. For some figures, computer code was not used to create the figure,
-and those figures are not represented here. Each directory has a README which explains how to use
-the materials in that directory to produce the corresponding figure.
+and those figures are not represented here. Each figure subdirectory has a README which explains how to use
+the materials in that subdirectory to produce the corresponding figure.
 
 ## Dependencies
 
 ### Dependencies on R and Matlab
 
 All figures were created with R and/or Matlab. For final tests of the code, we used R version 
-4.3.0 running on Ubuntu linux 18.04 and Matlab 2023b. Different figures were initially made by different
-coauthors on different machines, but all code was verified on the setup described above.
+4.3.0 running on Ubuntu linux 18.04 and Matlab 2023b running on Windows 10. Different figures were initially made by different
+coauthors on different machines, but all code was verified on the setups described above.
 
 ### R package versions
 
-See the README within each directory for specifics, but R package dependencies are listed at the
+See the README within each figure subdirectory for specifics, but R package dependencies are listed at the
 top of each script. 
 
 ## Acknowlegements
