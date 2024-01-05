@@ -9,7 +9,6 @@ library(tidyverse)
 library(patchwork)
 library(paletteer)
 
-
 # Row 1 construct 4 time series piecing together two frequencies -------------------------------------------------
 b1 <- 1
 b2 <- 2
@@ -43,7 +42,7 @@ dt$t4 <- ( rnorm(length(times),0, sig)*amp + t.series*rev(amp) ) / scale_coef
 
 # plot 4 timeseries on one panel to be paired with WMF plot
 p1 <- dt %>% 
-  select(time:t4) %>% 
+  dplyr::select(time:t4) %>% 
   mutate(t1 = t1 + b1,
          t2 = t2 + b2,
          t3 = t3 + b3,
@@ -65,7 +64,7 @@ p1
 dat <- dt %>% 
   pivot_longer(cols = c("t1","t2","t3","t4")) %>%
   pivot_wider(names_from = time, values_from = value) %>% 
-  select(-name) %>% 
+  dplyr::select(-name) %>% 
   as.matrix()
 
 # pass through clean dat function
@@ -135,7 +134,7 @@ dt$t4 <- c(t.series + rnorm(length(times),0, sig2)) / scale_coef
 
 # plot 4 timeseries on one panel to be paired with WMF plot
 p2 <- dt %>% 
-  select(time:t4) %>% 
+  dplyr::select(time:t4) %>% 
   mutate(t1 = t1 + b1,
          t2 = t2 + b2,
          t3 = t3 + b3,
@@ -158,7 +157,7 @@ p2
 dat <- dt %>% 
   pivot_longer(cols = c("t1","t2","t3","t4")) %>%
   pivot_wider(names_from = time, values_from = value) %>% 
-  select(-name) %>% 
+  dplyr::select(-name) %>% 
   as.matrix()
 
 # pass through clean dat function
@@ -237,7 +236,7 @@ dt$t4 <- c(t.series + rnorm(length(times),0, sig2)) / scale_coef
 
 # plot
 p4 <- dt %>% 
-  select(time:t4) %>% 
+  dplyr::select(time:t4) %>% 
   mutate(t1 = t1 + b1,
          t2 = t2 + b2,
          t3 = t3 + b3,
@@ -260,7 +259,7 @@ p4
 dat <- dt %>% 
   pivot_longer(cols = c("t1","t2","t3","t4")) %>%
   pivot_wider(names_from = time, values_from = value) %>% 
-  select(-name) %>% 
+  dplyr::select(-name) %>% 
   as.matrix()
 
 dat1 <- cleandat(dat[, 1:50], 1:50, 1)$cdat    # pre change

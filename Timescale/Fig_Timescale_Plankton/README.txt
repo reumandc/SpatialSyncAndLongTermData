@@ -1,8 +1,8 @@
 This folder has the code for making the figure showing the analysis of phytoplankton color
 time series truncated to different lengths. 
 
-To get the figure, set the working directory of matlab to this directory, and run the script
-Fig_Timescale_Plankton.m. 
+To get the figure, set the working directory of matlab to this directory, and then, from a 
+fresh Matlab session, run the script Fig_Timescale_Plankton.m. 
 
 The data are downloaded automatically from https://doi.mba.ac.uk/data/3152, and they have doi 
 10.17031/65705f59bc0eb. The prefered citation for these data is: 

@@ -5,16 +5,17 @@ data, and bristlecone pine growth ring data.
 main_calculateExampleWPMFs.R creates the WPMF magnitude & other files needed for plotting
 main_plotExampleWPMFs.m plots those outputs, generating the panels of the Example WPMFs figure 
 
-To run main_calculateExampleWPMFs.R: set the R working directory back to this directory, and see 
-the dependencies at the top of main_calculateWPMFs.R and make sure they are satisfied. Then run 
-that script.
+To run main_calculateExampleWPMFs.R: From a fresh R session, set the R working directory to 
+this directory, and see the dependencies at the top of main_calculateWPMFs.R and make sure 
+they are satisfied. Then run the script.
 
 The data for the bristlecone pine growth time series are pre-processed, as described in SI, as 
-follows: set the R working directory to SpatialSyncAndLongTermData/Timescale/Data_Timescale_Tree_Ring/ 
-and run the R code Data_Timescale_Tree_Ring.R (after making sure all the dependencies listed at the top of that file are met). 
+follows: Set the R working directory to SpatialSyncAndLongTermData/Timescale/Data_Timescale_Tree_Ring/ 
+and, from a fresh R session, run the R code Data_Timescale_Tree_Ring.R (after making sure all the 
+dependencies listed at the top of that file are met). 
 
-To run main_plotExampleWPMFs.m set the matlab working directory to this directory, and run the script.
-You may need a fairly recent version of matlab - we used 2023b.
+To run main_plotExampleWPMFs.m set the matlab working directory to this directory, and, from a fresh
+Matlab session, run the script. You may need a fairly recent version of matlab - we used 2023b.
 
 Note that the final figure was compiled in Adobe Illustrator, so there are cosmetic changes between the figure in the manuscript and the figure panels generated in this code. In particular, the minimum y-axis value was labeled in Illustrator to avoid the appearance that the y-axis starts at 0.
 
