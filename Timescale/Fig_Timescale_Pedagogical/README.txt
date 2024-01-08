@@ -11,7 +11,8 @@ get_q.R is a convenience function to get significant values for WPMF (taken from
 
 To run Fig_Timescale_Pedagogical_DataSynthesis.R: From a fresh R session, set the R working directory to 
 this directory, and see the dependencies at the top of Fig_Timescale_Pedagogical_DataSynthesis.R and make sure 
-they are satisfied. Then run the script. The original script was created in R 4.1.0.
+they are satisfied. Then run the script. The original script was created in R 4.1.0 and was also tested on
+R 4.3.0.
 
 To run main_plotExampleWPMFs.m set the matlab working directory to this directory, and, from a fresh
 Matlab session, run the script. You may need a fairly recent version of matlab - we used 2021a.
