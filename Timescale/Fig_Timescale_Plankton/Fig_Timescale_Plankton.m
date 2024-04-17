@@ -1,4 +1,4 @@
-clear all
+clear all; 
 
 %Data
 %
@@ -126,14 +126,22 @@ countall{yearlims}=count;
 
 end
 
+%%%an artificial decade of data:
+seriesdecade=randn(1,120);
+[wtresulttest] = mwt_comments(seriesdecade, parameters, f0)   ;
+
 
 figure; 
-subplot(3,1,1)
+subplot(3,1,1); hold on;
 surf(firstyearall(1)+1/12:1/12:lastyearall(1)+1,12*sf1,abs(wpmfresult1{1})); view(2); shading interp; set(gca,'yscale','log'); colormap jet;
+contour(firstyearall(3)+1/12:1/12:lastyearall(3)+1,12*sf1,isfinite(wpmfresult1{3}),[1 1],'k'); 
+contour(firstyearall(2)+1/12:1/12:lastyearall(2)+1,12*sf1,isfinite(wpmfresult1{2}),[1 1],'k'); 
 line([2015 2015],[0.25 0.5],[0 0],'Color','black', 'LineWidth', 10)
 xlim([min(year) max(year)])
 ylim([0.01 6])
 ylabel('Cycles/yr')
+yticks([0.01 0.02 0.1 0.2 1 2])
+yticklabels([0.01 0.02 0.1 0.2 1 2])
 text(1948, 0.03, 0, '(a)')
 box on
 caxis([0 1])
@@ -141,22 +149,28 @@ cb=colorbar;
 set(cb,'Position',[0.25 0.75 0.1, 0.1])
 
 
-subplot(3,1,2)
+subplot(3,1,2); hold on
 surf(firstyearall(2)+1/12:1/12:lastyearall(2)+1,12*sf1,abs(wpmfresult1{2})); view(2); shading interp; set(gca,'yscale','log'); colormap jet;
+contour3(1960+1/12:1/12:1970,12*sf1,isfinite(wtresulttest),[100 100],'k'); %comment out to restore reference ticklines to plot
 line([1958 1958],[0.02 0.25],[0 0],'Color','red', 'LineWidth', 10)
 line([2015 2015],[0.02 0.5],[0 0],'Color','blue', 'LineWidth', 10)
 xlim([min(year) max(year)])
 ylim([0.01 6])
 ylabel('Cycles/yr')
+yticks([0.01 0.02 0.1 0.2 1 2])
+yticklabels([0.01 0.02 0.1 0.2 1 2])
 text(1948, 0.03, 0, '(b)')
 box on
 caxis([0 1])
 
-subplot(3,1,3)
+subplot(3,1,3); hold on;
 surf(firstyearall(3)+1/12:1/12:lastyearall(3)+1,12*sf1,abs(wpmfresult1{3})); view(2); shading interp; set(gca,'yscale','log'); colormap jet;
+contour3(1960+1/12:1/12:1970,12*sf1,isfinite(wtresulttest),[1 1],'k'); 
 xlim([min(year) max(year)])
 ylim([0.01 6])
 ylabel('Cycles/yr')
+yticks([0.01 0.02 0.1 0.2 1 2])
+yticklabels([0.01 0.02 0.1 0.2 1 2])
 xlabel('Year')
 text(1948, 0.03, 0, '(c)')
 box on
