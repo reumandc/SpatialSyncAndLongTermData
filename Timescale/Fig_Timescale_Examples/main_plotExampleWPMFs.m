@@ -56,7 +56,7 @@ synchrony_timescale_plot(fname,xl,xticks_custom,yticks_custom,contline_width)
 fname = "PILO";
 xl = nan;
 yticks_custom = nan;
-xticks_custom = nan;
+xticks_custom = 0:200:1800;
 contline_width = 1;
 synchrony_timescale_plot(fname,xl,xticks_custom,yticks_custom,contline_width)
 
@@ -78,7 +78,7 @@ function synchrony_timescale_plot(fname,xl,xticks_custom,yticks_custom,contline_
     view(2)
     set(gca,'yscale','log'); % make the y-axis a log scale
     hold on; 
-    [C,h] = contour3(x,y,dat,[q q],'k'); % have to add contours because this determines limits...
+    [C,h] = contour3(x,y,dat,[q q],'k'); % have to add contours since they sometimes change axis limits
     yl = ylim; % set yl to the automatically set ylimit of the plot
     if (isnan(xl)) % if xl not given when the function was called...
         xl = [min(x),max(x)]; % set xl to the automatically set xlimit of the plot
