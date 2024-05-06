@@ -125,7 +125,6 @@ countall{yearlims}=count;
 [wpmfresult1{yearlims}] = wpmf_comments(wtresult,count);
 
 end
-
 %%%an artificial decade of data:
 seriesdecade=randn(1,120);
 [wtresulttest] = mwt_comments(seriesdecade, parameters, f0)   ;
@@ -139,9 +138,10 @@ contour(firstyearall(2)+1/12:1/12:lastyearall(2)+1,12*sf1,isfinite(wpmfresult1{2
 line([2015 2015],[0.25 0.5],[0 0],'Color','black', 'LineWidth', 10)
 xlim([min(year) max(year)])
 ylim([0.01 6])
-ylabel('Cycles/yr')
-yticks([0.01 0.02 0.1 0.2 1 2])
-yticklabels([0.01 0.02 0.1 0.2 1 2])
+ylabel('Timescale (years)')
+yticks([0.01 0.02 0.05 0.1 0.2 0.5 1 2])
+yticklabels([100 50 20 10 5 2 1 0.5])
+set(gca,'YMinorTick','Off')
 text(1948, 0.03, 0, '(a)')
 box on
 caxis([0 1])
@@ -156,9 +156,10 @@ line([1958 1958],[0.02 0.25],[0 0],'Color','red', 'LineWidth', 10)
 line([2015 2015],[0.02 0.5],[0 0],'Color','blue', 'LineWidth', 10)
 xlim([min(year) max(year)])
 ylim([0.01 6])
-ylabel('Cycles/yr')
-yticks([0.01 0.02 0.1 0.2 1 2])
-yticklabels([0.01 0.02 0.1 0.2 1 2])
+ylabel('Timescale (years)')
+yticks([0.01 0.02 0.05 0.1 0.2 0.5 1 2])
+yticklabels([100 50 20 10 5 2 1 0.5])
+set(gca,'YMinorTick','Off')
 text(1948, 0.03, 0, '(b)')
 box on
 caxis([0 1])
@@ -168,9 +169,10 @@ surf(firstyearall(3)+1/12:1/12:lastyearall(3)+1,12*sf1,abs(wpmfresult1{3})); vie
 contour3(1960+1/12:1/12:1970,12*sf1,isfinite(wtresulttest),[1 1],'k'); 
 xlim([min(year) max(year)])
 ylim([0.01 6])
-ylabel('Cycles/yr')
-yticks([0.01 0.02 0.1 0.2 1 2])
-yticklabels([0.01 0.02 0.1 0.2 1 2])
+ylabel('Timescale (years)')
+yticks([0.01 0.02 0.05 0.1 0.2 0.5 1 2])
+yticklabels([100 50 20 10 5 2 1 0.5])
+set(gca,'YMinorTick','Off')
 xlabel('Year')
 text(1948, 0.03, 0, '(c)')
 box on
