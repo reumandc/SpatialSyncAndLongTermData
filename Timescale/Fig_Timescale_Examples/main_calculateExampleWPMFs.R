@@ -1,5 +1,6 @@
 ## Written Oct. 2023 
 ## Code by Amanda Lohmann, amanda.lohmann@virginia.edu
+## Edits to add tests of timescale structure by Dan Reuman
 
 ## R Version 4.2.1
 ## Dependencies 
@@ -21,6 +22,7 @@
 # [fname]_syntimescale.csv --> mean value of synchrony at each timescale in *_timescales.csv
 # [fname]_syntime.csv --> mean value of synchrony at each timepoint in *_times.csv
 
+rm(list=ls())
 
 #### SETTINGS ####
 sigthresh = 0.95 # significance value at which to calculate contours (as 1-p_value, ex. sigthresh=0.95 corresponds to a p-value of 0.05); must be between 0 and 1
@@ -35,6 +37,8 @@ require(MASS) # (want the "write.matrix" function for writing matrices to csvs) 
 
 
 #### HELPER FUNCTIONS ####
+source("timescale_structure.R")
+
 save_wsyn_files <- function(dat,times,fname,sigthresh,scalefactor = 1) {
   # takes data matrix and time vector as arguments, and writes a series of .csv files containing WPMF values and associated data to be plotted later (written to working directory)
   
@@ -53,6 +57,7 @@ save_wsyn_files <- function(dat,times,fname,sigthresh,scalefactor = 1) {
   # [fname]_syntime.csv --> mean value of synchrony at each timepoint
   
   ## calculate WPMF
+  dat_orig<-dat
   dat = cleandat(dat,times,5)$cdat # detrend, set 0 mean, and clean data (see wsyn documentation for more details)
   res = wpmf(dat,times,sigmethod='quick') # calculate WPMF & its significance using wsyn package
   ttmat <- res$values # extract WPMF values
@@ -90,6 +95,39 @@ save_wsyn_files <- function(dat,times,fname,sigthresh,scalefactor = 1) {
   write.matrix(syn_timescale,file=paste(fname,'_syntimescale.csv',sep=''))
   write.matrix(syn_time,file=paste(fname,'_syntime.csv',sep=''))
   write.matrix(q,file=paste(fname,"_q_",sub(".*\\.", "", toString(sigthresh)),".csv",sep=''))
+  
+  #do the tests for "timescale structure"
+  if (scalefactor==1)
+  {
+    tsres<-timescale_structure(dat=dat,omit_freqs=NA)
+    saveRDS(tsres,file=paste0(fname,"_TimescaleStructure.Rds"))
+  }
+  if (scalefactor==4)
+  {
+    tsres<-timescale_structure(dat=dat,omit_freqs=c(1/5,1/3))
+    saveRDS(tsres,file=paste0(fname,"_TimescaleStructure.Rds"))
+  }
+  if (scalefactor==12)
+  {
+    tsres<-timescale_structure(dat=dat,omit_freqs=c(1/13,1/11))
+    saveRDS(tsres,file=paste0(fname,"_TimescaleStructure.Rds"))
+  }
+  
+  #special case - aphids
+  if (fname=="APHIDS")
+  {
+    dat1<-dat_orig[,times<=1993]
+    dat2<-dat_orig[,times>1993]
+    times1<-times[times<=1993]
+    times2<-times[times>1993]
+    dat1 <- cleandat(dat1,times1,5)$cdat 
+    dat2 <- cleandat(dat2,times2,5)$cdat 
+    
+    tsres1<-timescale_structure(dat=dat1,omit_freqs=NA)
+    saveRDS(tsres1,file=paste0("APHIDS_EARLY","_TimescaleStructure.Rds"))
+    tsres2<-timescale_structure(dat=dat2,omit_freqs=NA)
+    saveRDS(tsres2,file=paste0("APHIDS_LATE","_TimescaleStructure.Rds"))
+  }
 }
 
 get_q <- function (res, sigthresh = 0.95) {
@@ -250,3 +288,71 @@ df = df[,!names(df) %in% c('site')]
 dat = as.matrix(df)
 fname = "PILO"
 save_wsyn_files(dat,times,fname,sigthresh)
+
+#### Now make a table with all the results for testing the significance of timescale structure ###
+
+digs<-3
+
+tab<-data.frame(System=c("Shorebirds","Car crashes","Kelp","Aphids","Aphids, early","Aphids, late",
+                         "Deer","Plankton","Dengue","Bristlecone"),
+                Test_1=NA,Test_1_no_annual=NA,Test_2=NA,Test_2_no_annual=NA)
+#shorebird
+h<-readRDS(file="SHOREBIRDS_TimescaleStructure.Rds")
+tab[1,2]<-round(h$equal.kappa.test.res$p.value,digs)
+tab[1,3]<-round(h$equal.kappa.test.res.omit$p.value,digs)
+tab[1,4]<-round(h$like.rat.test.res$p,digs)
+tab[1,5]<-round(h$like.rat.test.res.omit$p,digs)
+
+#car crash
+h<-readRDS(file="CARACCIDENTS_TimescaleStructure.Rds")
+tab[2,2]<-round(h$equal.kappa.test.res$p.value,digs)
+tab[2,3]<-round(h$equal.kappa.test.res.omit$p.value,digs)
+tab[2,4]<-round(h$like.rat.test.res$p,digs)
+tab[2,5]<-round(h$like.rat.test.res.omit$p,digs)
+
+#kelp
+h<-readRDS(file="KELP_TimescaleStructure.Rds")
+tab[3,2]<-round(h$equal.kappa.test.res$p.value,digs)
+tab[3,3]<-round(h$equal.kappa.test.res.omit$p.value,digs)
+tab[3,4]<-round(h$like.rat.test.res$p,digs)
+tab[3,5]<-round(h$like.rat.test.res.omit$p,digs)
+
+#aphid
+h<-readRDS(file="APHIDS_TimescaleStructure.Rds")
+tab[4,2]<-round(h$equal.kappa.test.res$p.value,digs)
+tab[4,4]<-round(h$like.rat.test.res$p,digs)
+
+#aphid early
+h<-readRDS(file="APHIDS_EARLY_TimescaleStructure.Rds")
+tab[5,2]<-round(h$equal.kappa.test.res$p.value,digs)
+tab[5,4]<-round(h$like.rat.test.res$p,digs)
+
+#aphid late
+h<-readRDS(file="APHIDS_LATE_TimescaleStructure.Rds")
+tab[6,2]<-round(h$equal.kappa.test.res$p.value,digs)
+tab[6,4]<-round(h$like.rat.test.res$p,digs)
+
+#deer 
+h<-readRDS(file="DEER_TimescaleStructure.Rds")
+tab[7,2]<-round(h$equal.kappa.test.res$p.value,digs)
+tab[7,4]<-round(h$like.rat.test.res$p,digs)
+
+#plankton
+h<-readRDS(file="PLANKTON_TimescaleStructure.Rds")
+tab[8,2]<-round(h$equal.kappa.test.res$p.value,digs)
+tab[8,4]<-round(h$like.rat.test.res$p,digs)
+
+#dengue
+h<-readRDS(file="DENGUE_TimescaleStructure.Rds")
+tab[9,2]<-round(h$equal.kappa.test.res$p.value,digs)
+tab[9,3]<-round(h$equal.kappa.test.res.omit$p.value,digs)
+tab[9,4]<-round(h$like.rat.test.res$p,digs)
+tab[9,5]<-round(h$like.rat.test.res.omit$p,digs)
+
+#pine
+h<-readRDS(file="PILO_TimescaleStructure.Rds")
+tab[10,2]<-round(h$equal.kappa.test.res$p.value,digs)
+tab[10,4]<-round(h$like.rat.test.res$p,digs)
+
+tabx<-xtable::xtable(tab,digits=3,row.names=NULL)
+print(tabx,file="Table_pvalResults_TimescaleStructure.tex",include.rownames=FALSE)
