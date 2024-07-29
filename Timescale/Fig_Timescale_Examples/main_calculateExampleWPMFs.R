@@ -1,6 +1,8 @@
 ## Written Oct. 2023 
 ## Code by Amanda Lohmann, amanda.lohmann@virginia.edu
-## Edits to add tests of timescale structure by Dan Reuman
+## Edits to add tests of timescale structure by Dan Reuman. Later deemed not useful and but
+## retained (commented) for record keeping, and because they don't affect the earlier results
+## anyway. 
 
 ## R Version 4.2.1
 ## Dependencies 
@@ -37,7 +39,7 @@ require(MASS) # (want the "write.matrix" function for writing matrices to csvs) 
 
 
 #### HELPER FUNCTIONS ####
-source("timescale_structure.R")
+#source("timescale_structure.R")
 
 save_wsyn_files <- function(dat,times,fname,sigthresh,scalefactor = 1) {
   # takes data matrix and time vector as arguments, and writes a series of .csv files containing WPMF values and associated data to be plotted later (written to working directory)
