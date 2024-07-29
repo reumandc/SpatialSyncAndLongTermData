@@ -124,17 +124,30 @@ countall{yearlims}=count;
 %mean fields
 [wpmfresult1{yearlims}] = wpmf_comments(wtresult,count);
 
+%%%%a set of random phasors of the same size (10 000 surrogates)
+for ex=1:10000
+example=exp(1i*2*pi*rand(1,count));
+exampleall(ex)=abs(mean(example));
+end
+[y,i]=sort(exampleall);
+per999{yearlims}=y(9990);
+per99{yearlims}=y(9900);
+per95{yearlims}=y(9500);
+per90{yearlims}=y(9000);
+
 end
 %%%an artificial decade of data:
 seriesdecade=randn(1,120);
 [wtresulttest] = mwt_comments(seriesdecade, parameters, f0)   ;
 
-
 figure; 
 subplot(3,1,1); hold on;
 surf(firstyearall(1)+1/12:1/12:lastyearall(1)+1,12*sf1,abs(wpmfresult1{1})); view(2); shading interp; set(gca,'yscale','log'); colormap jet;
+contour3(firstyearall(1)+1/12:1/12:lastyearall(1)+1,12*sf1,abs(wpmfresult1{1}),[per95{1} per95{1}],'k','LineWidth',2); 
 contour(firstyearall(3)+1/12:1/12:lastyearall(3)+1,12*sf1,isfinite(wpmfresult1{3}),[1 1],'k'); 
 contour(firstyearall(2)+1/12:1/12:lastyearall(2)+1,12*sf1,isfinite(wpmfresult1{2}),[1 1],'k'); 
+% line([firstyearall(1) lastyearall(1)],[0.25 0.25],[0 0],'Color','black', 'LineWidth', 1)
+% line([firstyearall(1) lastyearall(1)],[0.5 0.5],[0 0],'Color','black', 'LineWidth', 1)
 line([2015 2015],[0.25 0.5],[0 0],'Color','black', 'LineWidth', 10)
 xlim([min(year) max(year)])
 ylim([0.01 6])
@@ -151,8 +164,13 @@ set(cb,'Position',[0.25 0.75 0.1, 0.1])
 
 subplot(3,1,2); hold on
 surf(firstyearall(2)+1/12:1/12:lastyearall(2)+1,12*sf1,abs(wpmfresult1{2})); view(2); shading interp; set(gca,'yscale','log'); colormap jet;
-contour3(1960+1/12:1/12:1970,12*sf1,isfinite(wtresulttest),[100 100],'k'); %comment out to restore reference ticklines to plot
+contour3(1960+1/12:1/12:1970,12*sf1,isfinite(wtresulttest),[100 100],'k'); %dummy, comment out to restore reference ticklines to plot
+contour3(firstyearall(2)+1/12:1/12:lastyearall(2)+1,12*sf1,abs(wpmfresult1{2}),[per95{2} per95{2}],'k','LineWidth',2);
+% line([firstyearall(2) lastyearall(2)],[0.02 0.02],[0 0],'Color','red', 'LineWidth', 1)
+% line([firstyearall(2) lastyearall(2)],[0.25 0.25],[0 0],'Color','red', 'LineWidth', 1)
 line([1958 1958],[0.02 0.25],[0 0],'Color','red', 'LineWidth', 10)
+% line([firstyearall(2) lastyearall(2)],[0.02 0.02],[0 0],'Color','blue', 'LineWidth', 1)
+% line([firstyearall(2) lastyearall(2)],[0.5 0.5],[0 0],'Color','blue', 'LineWidth', 1)
 line([2015 2015],[0.02 0.5],[0 0],'Color','blue', 'LineWidth', 10)
 xlim([min(year) max(year)])
 ylim([0.01 6])
@@ -166,7 +184,8 @@ caxis([0 1])
 
 subplot(3,1,3); hold on;
 surf(firstyearall(3)+1/12:1/12:lastyearall(3)+1,12*sf1,abs(wpmfresult1{3})); view(2); shading interp; set(gca,'yscale','log'); colormap jet;
-contour3(1960+1/12:1/12:1970,12*sf1,isfinite(wtresulttest),[1 1],'k'); 
+contour3(firstyearall(3)+1/12:1/12:lastyearall(3)+1,12*sf1,abs(wpmfresult1{3}),[per95{3} per95{3}],'k','LineWidth',2); 
+contour3(1960+1/12:1/12:1970,12*sf1,isfinite(wtresulttest),[1 1],'m'); %
 xlim([min(year) max(year)])
 ylim([0.01 6])
 ylabel('Timescale (years)')
@@ -188,8 +207,8 @@ axes('pos',[.17 .42 .1 .2])
 imshow('thermometer.jpg')
 
 set(gcf, 'paperpositionmode','manual','paperunits','inches','paperposition',[0 0 6 4],'papersize',[6 4])
-print(gcf,'-dtiff', '-r600', ['Z_111223.tif'])
-print(gcf,'-dpdf', '-r600', ['Z_111223.pdf'])
+print(gcf,'-dtiff', '-r600', ['Z_240724.tif'])
+print(gcf,'-dpdf', '-r600', ['Z_240724.pdf'])
 % 
 % Figure Z. the wavelet phasor mean field magnitude of PCI variability in seas
 % around the UK, using a) data from 1984 to 2013, b) data from 1958 to 2013,

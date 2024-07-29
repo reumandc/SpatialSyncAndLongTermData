@@ -21,7 +21,7 @@ source("myEqualKappaTestRad.R")
 #                             list with several components, see the docs for the function.
 #equal.kappa.test.res.omit  Same as the above, but after omitting the frequencies.
 #like.rat.test.res          The results of circ_homog
-#like.rat.test.res          Same as the above, but after omitting the frequencies.
+#like.rat.test.res.omit     Same as the above, but after omitting the frequencies.
 #
 timescale_structure<-function(dat,omit_freqs=NA)
 {
