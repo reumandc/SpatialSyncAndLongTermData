@@ -63,8 +63,9 @@ edgeMin2 <- quantile(lower(cormat.plantago.post), 0.9)
 
 pdf("synchNet_pre_postInvasion.pdf", width=3, height=6)
 
-par(mfrow=c(2,1), mar=c(0.6,0.6,1.4,0.6))
-plot(NA, NA, xlim=range(coords$coordX), ylim=range(coords$coordY), xaxt="n", yaxt="n", asp=1)
+par(mfrow=c(2,1), mar=c(3.1,3.1,1.4,0.6), mgp=c(2,0.7,0))
+plot(NA, NA, xlim=range(coords$coordX), ylim=range(coords$coordY), asp=1,
+     xlab="Plot X coordinate (m)", ylab="Plot Y coordinate (m)")
 
 mtext("Pre-invasion", cex=1, line=0.1)
 
@@ -75,11 +76,12 @@ for(ii in 2:length(plots)){
     }
   }
 }
-points(coords$coordX, coords$coordY, pch=21, bg="darkgrey", cex=1.5)
+points(coords$coordX, coords$coordY, pch=21, bg="darkgrey", cex=1.1)
 text(par("usr")[1]+0.05*diff(par("usr")[1:2]),
      par("usr")[4]-0.05*diff(par("usr")[3:4]), "(a)")
 
-plot(NA, NA, xlim=range(coords$coordX), ylim=range(coords$coordY), xaxt="n", yaxt="n", asp=1)
+plot(NA, NA, xlim=range(coords$coordX), ylim=range(coords$coordY), asp=1,
+     xlab="Plot X coordinate (m)", ylab="Plot Y coordinate (m)")
 
 mtext("Post-invasion", cex=1, line=0.1)
 
@@ -90,7 +92,7 @@ for(ii in 2:length(plots)){
     }
   }
 }
-points(coords$coordX, coords$coordY, pch=21, bg="darkgrey", cex=1.5)
+points(coords$coordX, coords$coordY, pch=21, bg="darkgrey", cex=1.1)
 text(par("usr")[1]+0.05*diff(par("usr")[1:2]),
      par("usr")[4]-0.05*diff(par("usr")[3:4]), "(b)")
 
