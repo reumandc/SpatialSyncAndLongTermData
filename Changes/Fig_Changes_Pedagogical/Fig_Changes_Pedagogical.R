@@ -33,6 +33,7 @@ sig <- .3
 amp <- seq(from = 1, to = .2, length.out = length(times))
 
 set.seed(5487)
+
 # append time series, have noise decrease and period increase with time
 dt$t1 <- ( rnorm(length(times),0, sig)*amp + t.series*rev(amp) ) / scale_coef
 dt$t2 <- ( rnorm(length(times),0, sig)*amp + t.series*rev(amp) ) / scale_coef
