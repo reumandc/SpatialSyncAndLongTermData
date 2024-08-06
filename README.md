@@ -6,7 +6,7 @@ DC Reuman, University of Kansas, reuman@ku.edu
 JA Walter, UC Davis and University of Virginia  
 LW Sheppard, Marine Biological Association of the UK  
 VA Karatayev, University of Kansas  
-ES Kadiyala, Univrsity of Virginia  
+ES Kadiyala, University of Virginia  
 AC Lohmann, University of Virginia  
 TL Anderson, Southern Illinois University, Edwardsville  
 NJ Coombs, University of Kansas  
