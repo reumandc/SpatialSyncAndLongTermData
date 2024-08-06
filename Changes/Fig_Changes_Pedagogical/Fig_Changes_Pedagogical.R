@@ -9,13 +9,18 @@ library(tidyverse)
 library(patchwork)
 library(paletteer)
 
+# source function to plot wpmf with desired x and y axes thickness, and contour thickness
+source('plot_wpmf_custom.R')
+
 # Row 1 construct 4 time series piecing together two frequencies -------------------------------------------------
 b1 <- 1
 b2 <- 2
 b3 <- 3
 b4 <- 4
+b5 <- 5
+b6 <- 6
 
-scale_coef <- 2 # to scale the amplitudes of the time series on the plot
+scale_coef <- 1.5 # to scale the amplitudes of the time series on the plot
 
 timeinc<-1 #  sample per year
 startfreq<-0.2 # cycles per year
@@ -40,7 +45,6 @@ dt$t2 <- ( rnorm(length(times),0, sig)*amp + t.series*rev(amp) ) / scale_coef
 dt$t3 <- ( rnorm(length(times),0, sig)*amp + t.series*rev(amp) ) / scale_coef
 dt$t4 <- ( rnorm(length(times),0, sig)*amp + t.series*rev(amp) ) / scale_coef
 
-
 # plot 4 timeseries on one panel to be paired with WMF plot
 p1 <- dt %>% 
   dplyr::select(time:t4) %>% 
@@ -57,13 +61,13 @@ p1 <- dt %>%
         axis.ticks.length=unit(-0.15, "cm")) +
   xlab(element_blank()) +
   scale_x_continuous(limits = c(1,100), breaks = c(1,25,50,75,100), labels = c(0,25,50,75,100), expand = c(0.01,0.01)) +
-  scale_y_continuous("", breaks = c(1,2,3,4))
+  scale_y_continuous("", breaks = c(1,2,3,4,5,6))
 
 p1
 
 # wrangle, drop irrelevant columns
 dat <- dt %>% 
-  pivot_longer(cols = c("t1","t2","t3","t4")) %>%
+  pivot_longer(cols = c("t1","t2","t3","t4")) %>% 
   pivot_wider(names_from = time, values_from = value) %>% 
   dplyr::select(-name) %>% 
   as.matrix()
@@ -81,30 +85,24 @@ WMF_margins <- c(5,6.75,1,4)
 WMF_legendwidth <- 2
 WMF_legendmar <- 7
 
-# plot WMF
-res1<-wmf(dat,times, scale.max.input = 30)
+# plot WMF with WPMF contours
+res1<-wpmf(dat, times, scale.max.input = 30, sigmethod = "quick")  # wpmf for significance contours
+res1_wmf <- wmf(dat = dat, times = times, scale.max.input = 30)   # wmf for measure of phase and oscillation magnitude agreement
 
-timescales <- res1$timescales        # save timescales for plot customization
-ylocs <- pretty(timescales, n = 8)   # set axis intervals
-xlocs <- pretty(times, n = 8)
+# assign the WMF values to the WPMF object, so the plot method will include WPMF significance contours over the WMF plot
+res1$values <- res1_wmf$values
 
-par(mar= WMF_margins, cex.lab = WMF_lab, cex.axis = WMF_axis, tcl = WMF_ticks, mgp = WMF_spacing)
-plotmag(res1,  legend.width = WMF_legendwidth, legend.mar = WMF_legendmar) 
-axis(1, at = xlocs, labels = xlocs, lwd = 2)
-axis(2, at = log2(ylocs), labels = ylocs, lwd = 2)
-
+par(mar = WMF_margins, cex.lab = WMF_lab, cex.axis = WMF_axis, tcl = WMF_ticks, mgp = WMF_spacing)
+plot_wpmf_custom(res1, legend.width = WMF_legendwidth, legend.mar = WMF_legendmar)
 
 pdf("Fig_Changes_Pedagogical_ChangeTimeWMF.pdf", width = 12, height = 7.5)
 par(mar= WMF_margins, cex.lab = WMF_lab, cex.axis = WMF_axis, tcl = WMF_ticks, mgp = WMF_spacing)
-plotmag(res1, legend.width = WMF_legendwidth, legend.mar = WMF_legendmar)
-axis(1, at = xlocs, labels = xlocs, lwd = 2)
-axis(2, at = log2(ylocs), labels = ylocs, lwd = 2)
+plot_wpmf_custom(res1, legend.width = WMF_legendwidth, legend.mar = WMF_legendmar)
 dev.off()
-
 
 # Row 2 - decrease frequencies over time  ----------------------------------------------------
 
-scale_coef <- 2.5 # to scale the amplitudes of the timeseries on the plot
+scale_coef <- 2 # to scale the amplitudes of the timeseries on the plot
 
 timeinc<-1 #  sample per year
 startfreq<-0.4 # cycles per year
@@ -165,25 +163,26 @@ dat <- dt %>%
 times = 1:ncol(dat)
 dat <- cleandat(dat, times, 1)$cdat
 
-# plot WMF
-res2<-wmf(dat,times, scale.max.input = 30)
-par(mar= WMF_margins, cex.lab = WMF_lab, cex.axis = WMF_axis, tcl = WMF_ticks, mgp = WMF_spacing)
-plotmag(res2,legend.width = WMF_legendwidth, legend.mar = WMF_legendmar)
-axis(1, at = xlocs, labels = xlocs, lwd = 2)
-axis(2, at = log2(ylocs), labels = ylocs, lwd = 2)
+# plot WMF with WPMF contours
+res2<-wpmf(dat, times, scale.max.input = 30, sigmethod = "quick")  # wpmf for significance contours
+res2_wmf <- wmf(dat = dat, times = times, scale.max.input = 30)   # wmf for measure of phase and oscillation magnitude agreement
+
+# assign the WMF values to the WPMF object, so the plot method will include WPMF significance contours over the WMF plot
+res2$values <- res2_wmf$values
+
+par(mar = WMF_margins, cex.lab = WMF_lab, cex.axis = WMF_axis, tcl = WMF_ticks, mgp = WMF_spacing)
+plot_wpmf_custom(res2, legend.width = WMF_legendwidth, legend.mar = WMF_legendmar)
+
 
 pdf("Fig_Changes_Pedagogical_ChangeTimescaleWMF.pdf", width = 12, height = 7.5)
 par(mar= WMF_margins, cex.lab = WMF_lab, cex.axis = WMF_axis, tcl = WMF_ticks, mgp = WMF_spacing)
-plotmag(res2, legend.width = WMF_legendwidth, legend.mar = WMF_legendmar)
-axis(1, at = xlocs, labels = xlocs, lwd = 2)
-axis(2, at = log2(ylocs), labels = ylocs, lwd = 2)
+plot_wpmf_custom(res2, legend.width = WMF_legendwidth, legend.mar = WMF_legendmar)
 dev.off()
-
 
 # Row 3 plot sites and abrupt change at two sites -------------------
 
 # construct 4 time series, sites 1 and 2 experience abrupt change
-scale_coef <- 2
+scale_coef <- 1.5
 
 # sites 1 and 2
 # first half
