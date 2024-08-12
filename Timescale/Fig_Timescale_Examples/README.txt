@@ -17,7 +17,7 @@ dependencies listed at the top of that file are met).
 To run main_plotExampleWPMFs.m set the matlab working directory to this directory, and, from a fresh
 Matlab session, run the script. You may need a fairly recent version of matlab - we used 2023b.
 
-Note that the final figure was compiled in Adobe Illustrator, so there are cosmetic changes between the figure in the manuscript and the figure panels generated in this code. In particular, the minimum y-axis value was labeled in Illustrator to avoid the appearance that the y-axis starts at 0.
+Note that the final figure was compiled in Adobe Illustrator, so there are cosmetic changes between the figure in the manuscript and the figure panels generated in this code. In particular, the minimum y-axis value was labeled in Illustrator to avoid the appearance that the y-axis starts at 0. Additionally, issues with the way matlab writes contour lines in vector files caused 'holes' in the lines to appear in the .eps renderings; these were touched up manually. The script also saves .png bitmap versions of all panels, which render correctly.
 
 DATASETS USED:
 
