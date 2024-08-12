@@ -8,49 +8,49 @@ fname = "PLANKTON"; % data 'name', as saved by Fig_Timescale_ExampleWPMFs_Genera
 xl = [1960,2010]; % years to start & stop the plot
 yticks_custom = 2:2:26; % set custom yticks for plotting
 xticks_custom = 1960:5:2010; % set custom xticks for plotting
-contline_width = 2; % contour line width
+contline_width = 7; % contour line width
 synchrony_timescale_plot(fname,xl,xticks_custom,yticks_custom,contline_width) % call function to plot it
 
 fname = "DEER";
 xl = [1984,2013]; 
 yticks_custom = nan;
 xticks_custom = 1980:5:2015;
-contline_width = 2;
+contline_width = 7;
 synchrony_timescale_plot(fname,xl,xticks_custom,yticks_custom,contline_width)
 
 fname = "DENGUE";
 xl = nan;
 yticks_custom = 1:20;
 xticks_custom = 1970:5:2015;
-contline_width = 2;
+contline_width = 7;
 synchrony_timescale_plot(fname,xl,xticks_custom,yticks_custom,contline_width)
 
 fname = "APHIDS";
 xl = nan;
 yticks_custom = nan;
 xticks_custom = 1980:5:2010;
-contline_width = 2;
+contline_width = 7;
 synchrony_timescale_plot(fname,xl,xticks_custom,yticks_custom,contline_width)
 
 fname = "KELP";
 xl = nan;
 yticks_custom = 0:20;
 xticks_custom = nan;
-contline_width = 2;
+contline_width = 7;
 synchrony_timescale_plot(fname,xl,xticks_custom,yticks_custom,contline_width)
 
 fname = "SHOREBIRDS";
 xl = nan;
 yticks_custom = 0:0.5:10;
 xticks_custom = 2009:2020;
-contline_width=2;
+contline_width=7;
 synchrony_timescale_plot(fname,xl,xticks_custom,yticks_custom,contline_width)
 
 fname = "CARACCIDENTS";
 xl = nan;
 yticks_custom = 1:20;
 xticks_custom = nan;
-contline_width = 2;
+contline_width = 7;
 synchrony_timescale_plot(fname,xl,xticks_custom,yticks_custom,contline_width)
 
 fname = "PILO";
