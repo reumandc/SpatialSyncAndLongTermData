@@ -376,10 +376,16 @@ save_wsyn_files(dat,times,fname,sigthresh)
 set.seed(100)
 matsize<-10
 tslen<-50
+tslen_l<-500
+tslen_rl<-5000
 sig<-matrix(.3,matsize,matsize)
 diag(sig)<-1
-dat<-t(mvtnorm::rmvnorm(tslen,mean=rep(0,matsize),sigma=sig))
+dat_rl<-t(mvtnorm::rmvnorm(tslen_rl,mean=rep(0,matsize),sigma=sig))
+dat_l<-dat_rl[,1:tslen_l]
+dat<-dat_l[,1:tslen]
 times<-seq(from=1,to=tslen,by=1)
+times_l<-seq(from=1,to=tslen_l,by=1)
+times_rl<-seq(from=1,to=tslen_rl,by=1)
 
 dat<-wsyn::cleandat(dat,times,clev=2)$cdat
 wpmfres<-wsyn::wpmf(dat,times,sigmethod="quick",nrand=1000000)
@@ -387,17 +393,50 @@ pdf(file="NULLSIM1.pdf")
 wsyn::plotmag(wpmfres,sigthresh=c(.95,.999))
 dev.off()
 
-#do it once
+tavg_1<-apply(FUN=mean,X=Mod(wpmfres$values),MARGIN=2,na.rm=TRUE)
+tss<-wpmfres$timescales
+
+dat_l<-wsyn::cleandat(dat_l,times_l,clev=2)$cdat
+wpmfres<-wsyn::wpmf(dat_l,times_l,sigmethod="none")
+tavg_1_l<-apply(FUN=mean,X=Mod(wpmfres$values),MARGIN=2,na.rm=TRUE)
+tss_l<-wpmfres$timescales
+
+dat_rl<-wsyn::cleandat(dat_rl,times_rl,clev=2)$cdat
+wpmfres<-wsyn::wpmf(dat_rl,times_rl,sigmethod="none")
+tavg_1_rl<-apply(FUN=mean,X=Mod(wpmfres$values),MARGIN=2,na.rm=TRUE)
+tss_rl<-wpmfres$timescales
+
+#do it again
 set.seed(105)
-matsize<-10
-tslen<-50
-sig<-matrix(.3,matsize,matsize)
-diag(sig)<-1
-dat<-t(mvtnorm::rmvnorm(tslen,mean=rep(0,matsize),sigma=sig))
-times<-seq(from=1,to=tslen,by=1)
+dat_rl<-t(mvtnorm::rmvnorm(tslen_rl,mean=rep(0,matsize),sigma=sig))
+dat_l<-dat_rl[,1:tslen_l]
+dat<-dat_l[,1:tslen]
 
 dat<-wsyn::cleandat(dat,times,clev=2)$cdat
 wpmfres<-wsyn::wpmf(dat,times,sigmethod="quick",nrand=1000000)
 pdf(file="NULLSIM2.pdf")
 wsyn::plotmag(wpmfres,sigthresh=c(.95,.999))
 dev.off()
+
+tavg_2<-apply(FUN=mean,X=Mod(wpmfres$values),MARGIN=2,na.rm=TRUE)
+
+dat_l<-wsyn::cleandat(dat_l,times_l,clev=2)$cdat
+wpmfres<-wsyn::wpmf(dat_l,times_l,sigmethod="none")
+tavg_2_l<-apply(FUN=mean,X=Mod(wpmfres$values),MARGIN=2,na.rm=TRUE)
+
+dat_rl<-wsyn::cleandat(dat_rl,times_rl,clev=2)$cdat
+wpmfres<-wsyn::wpmf(dat_rl,times_rl,sigmethod="none")
+tavg_2_rl<-apply(FUN=mean,X=Mod(wpmfres$values),MARGIN=2,na.rm=TRUE)
+
+pdf("NULLSIM_timeavg.pdf")
+plot(log2(tss),tavg_1,type="l",ylim=range(tavg_1,tavg_2,
+                                          tavg_1_l[1:length(tss)],tavg_2_l[1:length(tss)],
+                                          tavg_1_rl[1:length(tss)],tavg_2_rl[1:length(tss)]),
+     xlab="Log2 timescale",ylab="Time-averaged wpmf")
+lines(log2(tss),tavg_2,type="l",col="red")
+lines(log2(tss_l[1:length(tss)]),tavg_1_l[1:length(tss)],lty="dashed")
+lines(log2(tss_l[1:length(tss)]),tavg_2_l[1:length(tss)],col="red",lty="dashed")
+lines(log2(tss_rl[1:length(tss)]),tavg_1_rl[1:length(tss)],lty="dotted")
+lines(log2(tss_rl[1:length(tss)]),tavg_2_rl[1:length(tss)],col="red",lty="dotted")
+dev.off()
+
