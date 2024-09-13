@@ -81,7 +81,7 @@ hold on
 surf(scalefrequency,t,abs(mf'),abs(mf'))
 shading interp
 colormap('jet')
-contour3(scalefrequency,t,abs(mf'),[q_value   q_value],'k', LineWidth = 1)
+contour3(scalefrequency,t,abs(mf'),[q_value   q_value],'k', LineWidth = 2)
 set(gca,'xscale','log','xtick',[2 5 10 20],'xticklabel',[2 5 10 20])
 axis tight
 ylabel('Year')
