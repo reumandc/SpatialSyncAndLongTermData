@@ -20,10 +20,12 @@ This repository can be used to reproduce the analyses behind the paper "Insights
 
 ## How to reproduce results, how this repository is organized
 
-The paper "Insights into spatial synchrony enabled by long-term data" has three main sections, on the
-timescale structure of synchrony, on changes in synchrony, and on mechanisms of synchrony. This
-repository correspondingly has three directories, each containing subdirectories which correspond
-to the figures in that section. For some figures, computer code was not used to create the figure,
+The paper "Insights into spatial synchrony enabled by long-term data" has four main sections, on the
+timescale structure of synchrony, on inferences of causes of synchrony, on changes in synchrony, and 
+on mechanisms of synchrony. This repository has three directories, corresponding to the timescale, 
+changes, and mechanisms section, each containing subdirectories which correspond
+to the figures cited in that section. The only figures cited in the inferences section were first
+introduced in the timescale section. For some figures, computer code was not used to create the figure,
 and those figures are not represented here. Each figure subdirectory has a README which explains how to use
 the materials in that subdirectory to produce the corresponding figure.
 
@@ -42,5 +44,5 @@ top of each script.
 
 ## Acknowlegements
 
-D.C.R. was partly supported by the U.S. National Science Foundation (NSF) through NSF-OCE award 2023474, and also by the McDonnell Foundation and the Humboldt Foundation. M.C.N.C., E.S.K., and A.C.L. were supported by NSF-OCE award 2023555. J.A.W. was supported by California Department of Fish and Wildlife grant Q2296003 and NSF-OCE 2023555. The Rothamsted Insect Survey, a National Bioscience Resource Infrastructure, is funded by the Biotechnology and Biological Sciences Research Council under the award BBS/E/RH/23NB0006. We thank James Bell for data cooperation and useful discussions. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the authors and do not necessarily reflect the views of the National Science Foundation or the other funders. 
+D.C.R. was partly supported by U.S. National Science Foundation (NSF) grants BIO-OCE 2023474 and DEB-PCE 2414418, and also by the McDonnell Foundation and the Humboldt Foundation. M.C.N.C., E.S.K., and A.C.L. were supported by NSF-OCE award 2023555. J.A.W. was supported by California Department of Fish and Wildlife grant Q2296003 and NSF-OCE 2023555. The Rothamsted Insect Survey, a National Bioscience Resource Infrastructure, is funded by the Biotechnology and Biological Sciences Research Council under the award BBS/E/RH/23NB0006. We thank James Bell for data cooperation and useful discussions. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the authors and do not necessarily reflect the views of the National Science Foundation or the other funders. 
 
