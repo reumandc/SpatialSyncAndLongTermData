@@ -60,19 +60,19 @@ xticks_custom = 0:200:1800;
 contline_width = 1;
 synchrony_timescale_plot(fname,xl,xticks_custom,yticks_custom,contline_width)
 
-fname = "NULLSIM_95";
-xl = nan;
-yticks_custom = nan;
-xticks_custom = 0:10:50;
-contline_width = 1;
-synchrony_timescale_plot(fname,xl,xticks_custom,yticks_custom,contline_width)
+%fname = "NULLSIM_95";
+%xl = nan;
+%yticks_custom = nan;
+%xticks_custom = 0:10:50;
+%contline_width = 1;
+%synchrony_timescale_plot(fname,xl,xticks_custom,yticks_custom,contline_width)
 
-fname = "NULLSIM_999";
-xl = nan;
-yticks_custom = nan;
-xticks_custom = 0:10:50;
-contline_width = 1;
-synchrony_timescale_plot(fname,xl,xticks_custom,yticks_custom,contline_width)
+%fname = "NULLSIM_999";
+%xl = nan;
+%yticks_custom = nan;
+%xticks_custom = 0:10:50;
+%contline_width = 1;
+%synchrony_timescale_plot(fname,xl,xticks_custom,yticks_custom,contline_width)
 
 function synchrony_timescale_plot(fname,xl,xticks_custom,yticks_custom,contline_width)
     fsize = 21; % font size

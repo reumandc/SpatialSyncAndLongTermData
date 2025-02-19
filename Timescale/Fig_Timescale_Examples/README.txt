@@ -2,8 +2,8 @@ This folder has the code for making the figure showing example wavelet phasor me
 field (WPMF) plots for a variety of systems, including shorebird data, car crash fatality
 data, and bristlecone pine growth ring data.
 
-main_calculateExampleWPMFs.R creates the WPMF magnitude & other files needed for plotting
-main_plotExampleWPMFs.m plots those outputs, generating the panels of the Example WPMFs figure 
+main_calculateExampleWPMFs.R creates the WPMF magnitude & other files needed for plotting.
+main_plotExampleWPMFs.m plots those outputs, generating the panels of the Example WPMFs figure.
 
 To run main_calculateExampleWPMFs.R: From a fresh R session, set the R working directory to 
 this directory, and see the dependencies at the top of main_calculateWPMFs.R and make sure 
