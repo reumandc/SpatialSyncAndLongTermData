@@ -2,7 +2,22 @@
 # Data was accessed from the International Tree-Ring Data Bank: https://www.ncei.noaa.gov/access/paleo-search/?dataTypeId=18
 # Tree ring measurements for PILO stands were downloaded as .rwl files from the following sites:
 # ca534, ca535, ca667, nv500, nv515, nv516, nv520, nv521, ut509, and ut550.
+# Raw tree ring measurements are stored in the "data_raw" folder. Each .rwl is formatted in
+# the Tuscon format for tree ring data. Column 1 represents the core identity (i.e. subject ID),
+# Column 2 represents the oldest measurement in Columns 3-12, which represent tree ring width measurements.
+# Tree ring width measurements are measured in units of 0.01 mm when the stop marker is "999" and 0.001 mm when the stop marker is "-9999". 
+# The dplR::read.rwl() function detects the stop marker and corresponding units of measurement for each .rwl file.
+
 # Script written by Ethan Kadiyala in R 4.1.0, 11/13/23
+# Created in R 4.1.0
+
+# Dependencies 
+# wsyn (Version 1.0.4)
+# tidyverse (Version 2.0.0)
+# dplyr (Version 1.1.0)
+# ggplot2 (Version 3.5.0)
+# readr (Version 2.1.4)
+# dplR (Verison 1.7.4)
 
 # libraries
 library(tidyverse)

@@ -4,6 +4,14 @@
 # Ethan Kadiyala, 10/18/2023
 # Created in R version 4.1.0
 
+# Dependencies 
+# wsyn (Version 1.0.4)
+# tidyverse (Version 2.0.0)
+# dplyr (Version 1.1.0)
+# ggplot2 (Version 3.5.0)
+# patchwork (Version 1.2.0)
+# paletteer (Version 1.5.0)
+
 library(wsyn)
 library(tidyverse)
 library(patchwork)

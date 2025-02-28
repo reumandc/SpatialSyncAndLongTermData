@@ -6,6 +6,9 @@
 # Written by Ethan Kadiyala based on MATLAB code from Lawrence Sheppard, 11/7/2023
 # Created in R 4.1.0
 
+# Dependencies 
+# wsyn (Version 1.0.4)
+
 library(wsyn)
 source("get_q.R")   # convenience function to get significant values for WPMF (taken from wysn::wmpf())
 
